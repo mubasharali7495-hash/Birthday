@@ -1,105 +1,155 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+    <title>Happy Birthday Champion!</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+        }
+        body {
+            background-color: #ff6b81;
             font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: white;
             text-align: center;
-            overflow: hidden;
-            height: 100vh;
         }
         h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-top: 50px;
-            text-shadow: 2px 4px 10px rgba(0,0,0,0.2);
-            animation: bounce 1s infinite alternate;
+            font-size: 2rem;
+            margin: 20px 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+        /* Music Control Button */
+        #music-btn {
+            background-color: #fff;
+            color: #ff6b81;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        /* Image Slider Container */
+        .slider-container {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: 450px;
+            border: 8px solid white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background-color: #000;
+        }
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        .instruction {
-            color: #fff;
+        .wish-text {
             font-size: 1.2rem;
+            margin: 15px 0;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.15);
-            display: inline-block;
-            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 20px;
             border-radius: 20px;
-            margin-top: 10px;
-        }
-        /* Cake styling */
-        .cake-container {
-            position: absolute;
-            bottom: 12%;
-            left: 50%;
-            transform: translateX(-50%);
-            cursor: pointer;
-        }
-        .cake {
-            width: 160px;
-            height: 100px;
-            background: #f3a683;
-            border-radius: 15px 15px 0 0;
-            position: relative;
-            box-shadow: inset 0 10px #f19066, 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .cream {
-            width: 160px;
-            height: 25px;
-            background: #fff;
-            position: absolute;
-            top: 0;
-            border-radius: 15px 15px 0 0;
-        }
-        .candle {
-            width: 12px;
-            height: 45px;
-            background: #78e08f;
-            position: absolute;
-            top: -45px;
-            left: 74px;
-            border-radius: 5px;
-        }
-        .flame {
-            width: 16px;
-            height: 22px;
-            background: #ff9f1a;
-            border-radius: 50% 50% 20% 20%;
-            position: absolute;
-            top: -22px;
-            left: -2px;
-            box-shadow: 0 0 10px #ff9f1a;
-            animation: flicker 0.1s infinite alternate;
-        }
-        @keyframes flicker {
-            from { transform: scale(1); }
-            to { transform: scale(1.15); }
-        }
-        /* Balloons */
-        .balloon {
-            width: 55px;
-            height: 70px;
-            background: red;
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            position: absolute;
-            bottom: -100px;
-            animation: floatUp 7s infinite linear;
-        }
-        @keyframes floatUp {
-            0% { bottom: -100px; transform: translateX(0); opacity: 1; }
-            100% { bottom: 105vh; transform: translateX(50px); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <h1 id="title">HAPPY BIRTHDAY CHAMPION! 🎉</h1>
-    <div class="instruction" id="hint">Tap the candle to blow it out! 🎂</div>
+    <h1>HAPPY BIRTHDAY CHAMPION! 🎉👑</h1>
+    
+    <!-- Music play karne ka button -->
+    <button id="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+
+    <!-- Photo Slideshow (6 Photos) -->
+    <div class="slider-container">
+        <div class="slide active">
+            <img src="IMG-20260717-WA0006.jpg" alt="Photo 1">
+        </div>
+        <div class="slide">
+            <img src="IMG_20260119_110743_720.jpg" alt="Photo 2">
+        </div>
+        <div class="slide">
+            <img src="IMG-20260717-WA0005.jpg" alt="Photo 3">
+        </div>
+        <div class="slide">
+            <img src="IMG-20260716-WA0007.jpg" alt="Photo 4">
+        </div>
+        <div class="slide">
+            <img src="IMG-20260716-WA0008.jpg" alt="Photo 5">
+        </div>
+        <div class="slide">
+            <img src="IMG-20260706-WA0022.jpg" alt="Photo 6">
+        </div>
+    </div>
+
+    <p class="wish-text">We love you so much! ❤️</p>
+
+    <!-- Online Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/123/123-120.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Slideshow Logic
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000);
+
+        // Music Logic
+        let music = document.getElementById('bg-music');
+        let btn = document.getElementById('music-btn');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().then(() => {
+                    btn.innerHTML = "⏸️ Pause Music";
+                }).catch(err => {
+                    console.log("Audio play failed:", err);
+                });
+            } else {
+                music.pause();
+                btn.innerHTML = "🎵 Play Music";
+            }
+        }
+    </script>
+</body>
+</html>
