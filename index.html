@@ -18,10 +18,9 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
             color: white;
             text-align: center;
-            cursor: pointer; /* Screen par touch karne ka ishara */
+            cursor: pointer;
         }
         h1 {
             font-size: 2rem;
@@ -29,7 +28,6 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             animation: bounce 2s infinite;
         }
-        /* Music Control Button */
         #music-btn {
             background-color: #fff;
             color: #ff6b81;
@@ -42,12 +40,7 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             z-index: 10;
-            transition: transform 0.2s;
         }
-        #music-btn:active {
-            transform: scale(0.95);
-        }
-        /* Image Slider Container */
         .slider-container {
             position: relative;
             width: 90%;
@@ -95,10 +88,9 @@
 
     <h1>HAPPY BIRTHDAY CHAMPION! 🎉👑</h1>
     
-    <!-- Music play karne ka button -->
-    <button id="music-btn" onclick="toggleMusic(event)">🎵 Play Music</button>
+    <button id="music-btn" onclick="toggleMusic(event)">🎵 Play Birthday Music</button>
 
-    <!-- Photo Slideshow (6 Photos) -->
+    <!-- Photo Slideshow -->
     <div class="slider-container">
         <div class="slide active">
             <img src="IMG-20260717-WA0006.jpg" alt="Photo 1">
@@ -122,14 +114,13 @@
 
     <p class="wish-text">We love you so much! ❤️</p>
 
-    <!-- Direct MP3 Audio Source -->
+    <!-- Real Happy Birthday Song -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="https://vincents-files.pages.dev/happy-birthday.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Slideshow Logic
         let slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
 
@@ -139,14 +130,12 @@
             slides[currentSlide].classList.add('active');
         }, 3000);
 
-        // Music Logic
         let music = document.getElementById('bg-music');
         let btn = document.getElementById('music-btn');
         let hasPlayed = false;
 
-        // Function to toggle music via button click
         function toggleMusic(event) {
-            if (event) event.stopPropagation(); // Stop screen touch event from double-triggering
+            if (event) event.stopPropagation();
             if (music.paused) {
                 playAudio();
             } else {
@@ -165,10 +154,9 @@
 
         function pauseAudio() {
             music.pause();
-            btn.innerHTML = "🎵 Play Music";
+            btn.innerHTML = "🎵 Play Birthday Music";
         }
 
-        // Screen par kahin bhi touch karne se music chal pare (Browser block bypass karne ke liye)
         document.body.addEventListener('click', () => {
             if (!hasPlayed) {
                 playAudio();
@@ -177,4 +165,3 @@
     </script>
 </body>
 </html>
-
