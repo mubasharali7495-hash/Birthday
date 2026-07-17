@@ -21,6 +21,7 @@
             overflow-x: hidden;
             color: white;
             text-align: center;
+            cursor: pointer; /* Screen par touch karne ka ishara */
         }
         h1 {
             font-size: 2rem;
@@ -33,14 +34,18 @@
             background-color: #fff;
             color: #ff6b81;
             border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 12px 24px;
+            font-size: 1.1rem;
             font-weight: bold;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             z-index: 10;
+            transition: transform 0.2s;
+        }
+        #music-btn:active {
+            transform: scale(0.95);
         }
         /* Image Slider Container */
         .slider-container {
@@ -91,7 +96,7 @@
     <h1>HAPPY BIRTHDAY CHAMPION! 🎉👑</h1>
     
     <!-- Music play karne ka button -->
-    <button id="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+    <button id="music-btn" onclick="toggleMusic(event)">🎵 Play Music</button>
 
     <!-- Photo Slideshow (6 Photos) -->
     <div class="slider-container">
@@ -117,8 +122,8 @@
 
     <p class="wish-text">We love you so much! ❤️</p>
 
-    <!-- Online Audio Element (Naya Working Link) -->
-    <audio id="bg-music" loop>
+    <!-- Direct MP3 Audio Source -->
+    <audio id="bg-music" loop preload="auto">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -137,19 +142,38 @@
         // Music Logic
         let music = document.getElementById('bg-music');
         let btn = document.getElementById('music-btn');
+        let hasPlayed = false;
 
-        function toggleMusic() {
+        // Function to toggle music via button click
+        function toggleMusic(event) {
+            if (event) event.stopPropagation(); // Stop screen touch event from double-triggering
             if (music.paused) {
-                music.play().then(() => {
-                    btn.innerHTML = "⏸️ Pause Music";
-                }).catch(err => {
-                    console.log("Audio play failed:", err);
-                });
+                playAudio();
             } else {
-                music.pause();
-                btn.innerHTML = "🎵 Play Music";
+                pauseAudio();
             }
         }
+
+        function playAudio() {
+            music.play().then(() => {
+                btn.innerHTML = "⏸️ Pause Music";
+                hasPlayed = true;
+            }).catch(err => {
+                console.log("Audio play failed:", err);
+            });
+        }
+
+        function pauseAudio() {
+            music.pause();
+            btn.innerHTML = "🎵 Play Music";
+        }
+
+        // Screen par kahin bhi touch karne se music chal pare (Browser block bypass karne ke liye)
+        document.body.addEventListener('click', () => {
+            if (!hasPlayed) {
+                playAudio();
+            }
+        });
     </script>
 </body>
 </html>
