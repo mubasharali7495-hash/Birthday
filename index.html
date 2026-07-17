@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -103,50 +103,3 @@
 
     <h1 id="title">HAPPY BIRTHDAY CHAMPION! 🎉</h1>
     <div class="instruction" id="hint">Tap the candle to blow it out! 🎂</div>
-
-    <!-- Cake -->
-    <div class="cake-container" onclick="blowCandle()">
-        <div class="candle">
-            <div class="flame" id="flame"></div>
-        </div>
-        <div class="cake">
-            <div class="cream"></div>
-        </div>
-    </div>
-
-    <!-- Audio for fun -->
-    <audio id="birthday-song" src="https://assets.mixkit.co/active_storage/sfx/143/143-200.wav"></audio>
-
-    <script>
-        // Balloons Generator
-        function createBalloon() {
-            const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#9b59b6', '#ff6b81'];
-            const balloon = document.createElement('div');
-            balloon.classList.add('balloon');
-            balloon.style.left = Math.random() * 90 + 'vw';
-            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            balloon.style.animationDuration = Math.random() * 3 + 4 + 's';
-            document.body.appendChild(balloon);
-            setTimeout(() => balloon.remove(), 7000);
-        }
-        setInterval(createBalloon, 600);
-
-        function blowCandle() {
-            // Hide flame
-            document.getElementById('flame').style.display = 'none';
-            // Change texts
-            document.getElementById('title').innerText = "YAYYY! 🎉🎂🥳";
-            document.getElementById('hint').innerText = "We love you so much! ❤️";
-            
-            // Play a little sound effect
-            const audio = document.getElementById('birthday-song');
-            audio.play().catch(e => console.log("Audio play blocked by browser"));
-
-            // Show a sweet popup
-            setTimeout(() => {
-                alert("Happy Birthday to the coolest 7-year-old in the world! 🌟✨");
-            }, 300);
-        }
-    </script>
-</body>
-</html>
